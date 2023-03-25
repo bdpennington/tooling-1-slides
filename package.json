@@ -1,0 +1,23 @@
+{
+  "name": "tooling-pkmgr-bundlers",
+  "description": "Presentation on tooling for package managers and bundlers",
+  "author": "Brian Pennington <brian.pennington@futurimedia.com>",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.40.5",
+    "@slidev/theme-default": "*",
+    "@slidev/theme-seriph": "*"
+  },
+  "devDependencies": {
+    "@iconify-json/logos": "^1.1.23"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.streamon.fm/brian/tooling-pkmgr-bundlers.git"
+  }
+}
