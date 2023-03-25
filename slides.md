@@ -37,7 +37,7 @@ Understanding how package managers work, how and when to use external packages, 
 Slides available [here](https://code.ldrhub.com/brian/tooling-pkmgr-bundlers)
 
 <div class="abs-br m-6 flex gap-2">
-  <a href="https://code.ldrhub.com/brian/tooling-pkmgr-bundlers" target="_blank" alt="GitLab"
+  <a href="https://git.streamon.fm/brian/tooling-pkmgr-bundlers" target="_blank" alt="GitLab"
     class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
     <logos-gitlab />
   </a>
