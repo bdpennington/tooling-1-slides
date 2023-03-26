@@ -230,7 +230,7 @@ Let's look at the dependencies for the `@futuri/futuri-ui-kit` package.
 
 ## Engines
 
-You can specify the versions of software that your package is compatible with.
+You can specify the engine version(s) that your package is compatible with.
 
 Compatible versions of Node.js
 
@@ -244,11 +244,11 @@ Compatible versions of Node.js
 
 # Package Compatibility
 
-## Semver
+## Semver (Semantic Versioning)
 
 You can specify the versions of dependencies your package manager will install using [semver](https://semver.org/).
 
-Let's look at some different ways you can define dependencies. Most package managers that server as dependency managers follow this convention, but not all, or to the fullest extent.
+Let's look at some different ways you can define dependencies. Most package managers that manage dependencies follow this convention, but not all, or to the fullest extent.
 
 ```json{all|2|3|4|5|6|7|8|9|10|all}
 "dependencies": {
@@ -280,4 +280,66 @@ Let's look at some different ways you can define dependencies. Most package mana
 
 ---
 
-# Choosing Packages
+# How to Choose Packages
+
+There are a few things to consider when choosing packages/libraries to use in your project.
+
+- Does it solve a complex problem?
+- Is it well maintained?
+- What are its dependencies?
+- Is it well used / have a large community?
+- Does it have good documentation?
+- Is it well typed?
+- Does it have a robust testing suite?
+
+---
+
+# When Not to Reach for a Package
+
+Often, it's tempting to reach for a package to solve a problem, but it's important to consider if it's the right tool for the job, or if you even need it in the first place.
+
+## Utility Libraries
+
+Libraries like [Lodash](https://lodash.com/) and [Underscore](https://underscorejs.org/) are great for providing a set of utility functions that you can use in your code. However, more often than not, they're used as a crutch to do simple things that can be easily achieved with native code. Things like this can lead to a lot of bloat.
+
+If you really need something from these kinds of libraries, most provide a way to install/import only the specific part you need.
+
+For example, you can install only the `clonedeep` function from Lodash:
+
+```json
+"lodash.clonedeep": "^4.5.0",
+```
+
+instead of
+
+```json
+"lodash": "^4.5.0",
+```
+
+---
+
+# Real Example of Completely Unnecessary Bloat
+
+In the Content Cloud frontend application, a developer installed the Bootstrap icon component library, which is a whopping 1.5MB of icons, just to use the icon component five times in the entire project.
+
+Why is this a problem?
+
+Well, first, it adds 1.5MB to the main bundle when a user loads the application. That's a lot. Ideally, the **entire** bundle should less than 500KB. Just from the Bootstrap icon package, the bundle is already 3x larger than it should be. The icon package was also not tree-shakable, as it was a Vue plugin.
+
+Second, the codebase already has several other means of displaying icons, including the Material Icons font, the Font Awesome font, and the futuri-ui-kit icons (all of which are lazy-loaded and don't impact the initial bundle size).
+
+---
+
+# Another Example of Nondiscriminating Package Usage
+
+Again, in the Content Cloud library, a developer needed to render a chart for one of the views. However, instead of looking for the right tool for the job, they picked the first thing that looked like it might work. It had some problems.
+
+It was not well maintained. Looking through the packages issues on GitHub, the maintainer of the package had frequently gone months without addressing issues and often left the comment, "Sorry it took so long to get to this."
+
+Next, and more importantly, the package listed all its production dependencies as peer dependencies. This means that when we install the package, we have to install all those peer dependencies ourselves.
+
+Additionally, because of that, we were limited to the versions of those dependencies that the package listed as compatible.
+
+The worst of which was limiting us to an extremely outdated version of axios. `"axios": "^0.27.2"`.
+
+The only real solution to this was to uninstall the package entirely and reimplement the entire feature.
