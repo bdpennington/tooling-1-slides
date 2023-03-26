@@ -453,7 +453,7 @@ export default defineComponent({ ... })
   .my-class[data-v-8859cc6c] {
     color: red;
   }
-  .my-class[data-v-8859cc6c]p {
+  .my-class[data-v-8859cc6c] p {
     font-size: 2rem;
   }
 </style>
@@ -468,3 +468,161 @@ export default defineComponent({ ... })
 </div>
 
 <!-- Note that all of this is done under the hood for you by the framework, but it's important to understand how this works -->
+
+---
+
+# Code Splitting
+
+## What is It?
+
+Code splitting is the process of splitting your code into multiple bundles that can be loaded on demand.
+
+- Load only the code needed by the client
+- Increases performance
+
+## How to Do It
+
+It's far easier than you might think. By default, bundlers will split your code into multiple bundles when you use dynamic imports instead of static imports.
+
+<!-- - Shorter download duration
+- Faster script parsing and execution by browser -->
+
+---
+
+# Code Splitting Example
+
+<div class="flex space-between">
+<div class="mr-16px w-45% flex-grow-1">
+
+**In Vue Router**
+
+`vue-router`'s `RouteConfig` has an overload for the `component` property that takes a function that returns as promise that resolves to a component. This is a dynamic import.
+
+```ts
+const AppDashboard = () => import('./views/AppDashboard.vue');
+// instead of
+import AppDashboard from './views/AppDashboard.vue';
+
+const routes: RouteConfig[] = [
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: AppDashboard,
+  },
+];
+```
+
+</div>
+<div class="w-45% flex-grow-1">
+
+**Inside a Component**
+
+You can also lazy-load components inside of another component.
+
+```ts
+const CloseButton = () => import('./CloseButton.vue');
+// instead of
+import CloseButton from './CloseButton.vue';
+
+export default defineComponent({
+  components: {
+    CloseButton,
+  },
+});
+```
+
+</div>
+</div>
+
+---
+
+# Tree Shaking
+
+Tree shaking is a term commonly used within a JavaScript context to describe the removal of dead code.
+
+It relies on the import and export statements to detect if code modules are exported and imported for use between JavaScript files.
+
+Modern bundlers use static analysis to find dead code and remove it from the bundle.
+
+## Example
+
+Often, when developers refactor a large part of the codebase, it's not uncommon for them feel reluctant about deleting old versions of files in case a rollback is needed.
+
+While this is a bad practice (we use `git` for a reason), and MRs should never be accepted without having been cleaned up, tree shaking can save us here by removing these unused files from the bundle.
+
+---
+
+# ESM (EcmaScript Modules) vs CommonJS/UMD Modules
+
+ES6 (EcmaScript 2015) introduced a formalized module system for JavaScript, called ESM (EcmaScript Modules).
+
+Prior to that, JavaScript had no formal module system, and code was bundled as CommonJS modules, or UMD (Universal Module Definition). These were intended to be used with node applications rather than in the browser -- but it was common to see them used there.
+
+## The Big Difference
+
+The biggest difference between ESM and other module systems is that ESM is statically analyzable, while the others are not -- they use dynamic switching routines to determine what to load at runtime.
+
+This means that any code that was written as part of a CJS or UMD module is added into the final bundle, even if it's not used. There are ways around this, but it comes for free with ESM, making it the obvious choice.
+
+---
+
+# ESM vs CJS by Example
+
+<br />
+
+Let's look at the following CJS module:
+
+```js
+const { maxBy } = require('lodash-es');
+const fns = {
+  add: (a, b) => a + b,
+  subtract: (a, b) => a - b,
+  max: arr => maxBy(arr)
+};
+
+Object.keys(fns).forEach(fnName => module.exports[fnName] = fns[fnName]);
+```
+
+After we build our bundle, we can see that the entire `lodash-es` library is included in the bundle, even if we only use the `add` function.
+
+```bash
+$ cd dist && ls -lah
+625K Apr 13 13:04 out.js
+```
+
+<!-- 
+Notice that the bundle is 625KB. If we look into the output, we'll find all the functions from utils.js plus a lot of modules from lodash. Although we do not use lodash in index.js it's part of the output, which adds a lot of extra weight to our production assets.
+ -->
+
+---
+
+# ESM vs CJS by Example
+
+<br />
+
+Now let's convert that to ESM:
+
+```js
+export const add = (a, b) => a + b;
+export const subtract = (a, b) => a - b;
+
+import { maxBy } from 'lodash-es';
+
+export const max = arr => maxBy(arr);
+```
+
+After we build our bundle, we can see that it has a much smaller footprint, and only includes the functions we use (`add` in this case).
+
+```bash
+$ cd dist && ls -lah
+40 Apr 13 13:04 out.js
+```
+Wild, right?
+
+[More detail here](https://web.dev/commonjs-larger-bundles/)
+
+<!-- - Note the difference in export syntax
+- Mention not to copy CJS syntax from StackOverflow (i.e. `require()`)
+-->
+---
+
