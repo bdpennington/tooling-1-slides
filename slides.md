@@ -534,6 +534,8 @@ export default defineComponent({
 </div>
 </div>
 
+<!-- Talk about how `import()` works -->
+
 ---
 
 # Tree Shaking
@@ -626,3 +628,81 @@ Wild, right?
 -->
 ---
 
+# Other Bundler Features
+
+Some bundlers (like webpack) provide built-in dev servers that let you run your application locally.
+
+Here are some of the things you can do with dev servers:
+
+- Hot Module Replacement (HMR)
+- Proxy API requests
+- Intercept requests/responses
+- ... and most other things any web server can do
+- ... whatever else you might to implement yourself with plugins
+
+---
+
+# Modern Dev Servers
+
+Recently (as of this writing in early 2023), there are some newer options for dev servers that are much faster than the traditional webpack dev server. Notably, they take full advantage of ESM, and are must faster to start up and reload after changes.
+
+- [Vite](https://vitejs.dev/)
+- [esbuild](https://esbuild.github.io/)
+
+## Migrating from Webpack to Vite/Rollup
+
+In the near future, I'll be migrating our webpack-based projects to Vite. Little will change in the way you interact with the dev server, other than perhaps the command used to start it.
+
+Note that Vite itself is _not_ a bundler, but rather a tool that serves primarily as a dev server, but also can be used to bundle code. It uses `rollup` under the hood for this purpose (and maybe `esbuild` in the future).
+
+Further, it should be understood that Vite is not a Vue specific tool, despite being developed by the Vue team. It can be used with any framework (or no framework at all).
+
+---
+
+# What's Next in the Tooling Series?
+
+Some other topics I intend to cover in additional installments of this series are:
+
+- Linters / Formatters
+- Testing
+- Performance
+- CI/CD
+- Containers (Docker)
+- Container orchestration (Kubetnetes)
+- Monitoring
+- TypeScript (yes, it's tooling)
+
+---
+
+# Takeaway
+
+<br />
+
+In this installment, we covered the basics of package managers & bundlers, and how they work. It's important to realize that these tools, and the ones listed on the previous slide are hugely powerful, and serve to simply and improve the developer experience of writing application code.
+
+Much of the work performed by these tools are invisible to developers, which speaks to their usability and quality.
+
+Try to imagine what it would be like to build an application if you had to manually manage all of these things yourself (though some won't have to do any imagining).
+
+---
+layout: cover
+background: https://source.unsplash.com/RCAhiGJsUUE/1920x1080
+---
+
+# Thanks!
+
+## Questions? Comments? Ask away!
+
+<br />
+<br />
+
+### Contact
+
+<style>
+  ul {
+    list-style: none;
+  }
+</style>
+
+- Slack: @bdpennington
+- Email: brian.pennington@futurimedia.com
