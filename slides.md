@@ -291,6 +291,7 @@ There are a few things to consider when choosing packages/libraries to use in yo
 - Does it have good documentation?
 - Is it well typed?
 - Does it have a robust testing suite?
+- How does it affect the performance of your application?
 
 ---
 
