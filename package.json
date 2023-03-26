@@ -4,9 +4,10 @@
   "author": "Brian Pennington <brian.pennington@futurimedia.com>",
   "private": true,
   "scripts": {
-    "build": "slidev build",
+    "build": "slidev build --base /bdpennington/slides/tooling-pkmgr-bundlers",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export",
+    "deploy": "slidev build && . ./scripts/deploy.sh"
   },
   "dependencies": {
     "@slidev/cli": "^0.40.5",
