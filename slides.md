@@ -381,7 +381,7 @@ A JavaScript bundler is a tool that takes your code and all of its dependencies 
 Bundlers do (or can be configured to do) a lot of different transformations to your code.
 
 - Transpile JavaScript into older versions (babel, TypeScript, corejs)
-- Use pre-processors to turn CSS into JS modules (Sass, Less, PostCSS)
+- Use pre-processors to turn CSS libraries into JS modules (Sass, Less, PostCSS)
 - Transform HTML into JS modules (Pug, EJS, Handlebars)
 - Transform images into JS modules (SVG, PNG, JPG, GIF)
 - Inline assets (i.e. CSS -> string, or image -> data URI)
