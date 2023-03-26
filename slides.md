@@ -325,25 +325,41 @@ In the Content Cloud frontend application, a developer installed the Bootstrap i
 
 Why is this a problem?
 
-Well, first, it adds 1.5MB to the main bundle when a user loads the application. That's a lot. Ideally, the **entire** bundle should less than 500KB. Just from the Bootstrap icon package, the bundle is already 3x larger than it should be. The icon package was also not tree-shakable, as it was a Vue plugin.
+- It adds 1.5MB to the main bundle when a user loads the application. 
+- Codebase already has several other means of displaying icons, 
 
-Second, the codebase already has several other means of displaying icons, including the Material Icons font, the Font Awesome font, and the futuri-ui-kit icons (all of which are lazy-loaded and don't impact the initial bundle size).
+<div class="flex justify-center mt-24px">
+<img src="/assets/bootstrap-bundle.png" style="width: 50%; height: auto;">
+</div>
 
+<!-- 
+1. That's a lot. Ideally, the **entire** bundle should less than 500KB. Just from the Bootstrap icon package, the bundle is already 3x larger than it should be. The icon package was also not tree-shakable, as it was a Vue plugin.
+
+2. Including the Material Icons font, the Font Awesome font, and the futuri-ui-kit icons (all of which are lazy-loaded and don't impact the initial bundle size).
+ -->
+
+---
+layout: image-right
+image: /assets/refactor.png
 ---
 
 # Another Example of Nondiscriminating Package Usage
 
-Again, in the Content Cloud library, a developer needed to render a chart for one of the views. However, instead of looking for the right tool for the job, they picked the first thing that looked like it might work. It had some problems.
+In this case, a developer needed to render a chart. Instead of looking for the right tool, the first thing that looked okay was chosen.
 
-It was not well maintained. Looking through the packages issues on GitHub, the maintainer of the package had frequently gone months without addressing issues and often left the comment, "Sorry it took so long to get to this."
+- it was not well maintained
+- the package listed all its production dependencies as peer dependencies
+- limited to dependencies that the package listed as compatible
+- all of them were outdated
 
-Next, and more importantly, the package listed all its production dependencies as peer dependencies. This means that when we install the package, we have to install all those peer dependencies ourselves.
+The only solution to this was to uninstall the package entirely and reimplement the entire feature.
 
-Additionally, because of that, we were limited to the versions of those dependencies that the package listed as compatible.
 
-The worst of which was limiting us to an extremely outdated version of axios. `"axios": "^0.27.2"`.
-
-The only real solution to this was to uninstall the package entirely and reimplement the entire feature.
+<!-- 
+1. Looking through the packages issues on GitHub, the maintainer of the package had frequently gone months without addressing issues and often left the comment, "Sorry it took so long to get to this."
+2. This means that when we install the package, we have to install all those peer dependencies ourselves
+3. 
+ -->
 
 ---
 layout: cover
