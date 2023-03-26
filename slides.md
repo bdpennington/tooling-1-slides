@@ -344,3 +344,127 @@ Additionally, because of that, we were limited to the versions of those dependen
 The worst of which was limiting us to an extremely outdated version of axios. `"axios": "^0.27.2"`.
 
 The only real solution to this was to uninstall the package entirely and reimplement the entire feature.
+
+---
+layout: cover
+background: https://source.unsplash.com/X1exjxxBho4/1920x1080
+---
+
+# JavaScript Bundlers
+
+<img src="/assets/webpack-bundle.png" style="width: 100%; height: auto;">
+
+---
+
+# JavaScript Module Bundlers
+
+## Popular JavaScript Bundlers
+
+<br />
+
+- [webpack](https://webpack.js.org/)
+- [rollup](https://rollupjs.org/guide/en/)
+- [esbuild](https://esbuild.github.io/)
+- [parcel](https://parceljs.org/)
+- [browserify](http://browserify.org/)
+
+## What is a JavaScript Bundler?
+
+A JavaScript bundler is a tool that takes your code and all of its dependencies and bundles them together into deployable modules (singular, or many).
+
+<!-- We primarily use `webpack`, though I intend to move us toward `Vite` as a dev server, which generates bundles with `rollup` -->
+
+---
+
+# Bundler Features
+
+Bundlers do (or can be configured to do) a lot of different transformations to your code.
+
+- Transpile JavaScript into older versions (babel, TypeScript, corejs)
+- Use pre-processors to turn CSS into JS modules (Sass, Less, PostCSS)
+- Transform HTML into JS modules (Pug, EJS, Handlebars)
+- Transform images into JS modules (SVG, PNG, JPG, GIF)
+- Inline assets (i.e. CSS -> string, or image -> data URI)
+- Use framework SFC/template compilers (Vue, Svelte)
+- Code-splitting
+- Tree-shaking
+- ...and infinitely more via plugins
+
+<!-- reference
+- `.broserlistrc`/`.tsconfig` when talking about transpilation -->
+
+---
+
+# Loaders / Plugins
+
+Loaders are plugins that do transformations on your code. Webpack calls them loaders, but other bundlers tend to refer to them simply as plugins.
+
+Let's think about how a pre-processed language like SCSS gets turned into inlined CSS within your JS bundle from the `<style lang="scss">` block of a Vue SFC (using webpack).
+
+Several plugins come into play here (and order matters):
+
+1. `vue-loader` - parses the Vue SFC and extracts the `<style>` block
+2. `scss-loader` - processes the SCSS and turns it into CSS (via a sass compiler)
+3. `css-loader` - interprets `@import` and `url()` like `import`/`require()` and will resolve them
+4. `style-loader` - inject `<style>` tag into DOM
+
+Note that this is not necessarily how it works (different loaders are used in different versions), but it's a good example of how loaders work.
+
+**This is the basis for how all transformations work.**
+
+<!-- Note that each one of these plugins is configurable to modify behavior -->
+
+---
+
+# Visualized Transformation
+
+<div class="flex space-between">
+<div class="mr-16px w-45% flex-grow-1">
+
+## Vue SFC
+
+```vue
+<template>
+  <div class="my-class">
+    <p>Hello World</p>
+  </div>
+</template>
+
+<script lang="ts">
+export default defineComponent({ ... })
+</script>
+
+<style lang="scss" scoped>
+.my-class {
+  color: red;
+  p {
+    font-size: 2rem;
+  }
+}
+</style>
+```
+</div>
+<div class="w-45% flex-grow-1">
+
+## After Transformation in DOM
+
+```html
+<style type="text/css">
+  .my-class[data-v-8859cc6c] {
+    color: red;
+  }
+  .my-class[data-v-8859cc6c]p {
+    font-size: 2rem;
+  }
+</style>
+```
+
+- The styles are now inlined in the `<head>` of the document
+- The `scoped` attribute adds a dataset attribute to the selector, preventing contamination any place else that used the `my-class` class
+- Transformed SCSS into plain CSS
+- Minifies the CSS (un-minified for demo purposes)
+
+</div>
+</div>
+
+<!-- Note that all of this is done under the hood for you by the framework, but it's important to understand how this works -->
