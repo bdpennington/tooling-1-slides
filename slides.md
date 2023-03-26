@@ -340,7 +340,7 @@ Why is this a problem?
 
 ---
 layout: image-right
-image: ./assets/refactor.png
+image: ./refactor.png
 ---
 
 # Another Example of Nondiscriminating Package Usage
@@ -358,7 +358,6 @@ The only solution to this was to uninstall the package entirely and reimplement 
 <!-- 
 1. Looking through the packages issues on GitHub, the maintainer of the package had frequently gone months without addressing issues and often left the comment, "Sorry it took so long to get to this."
 2. This means that when we install the package, we have to install all those peer dependencies ourselves
-3. 
  -->
 
 ---
