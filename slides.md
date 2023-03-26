@@ -340,7 +340,7 @@ Why is this a problem?
 
 ---
 layout: image-right
-image: /assets/refactor.png
+image: ./assets/refactor.png
 ---
 
 # Another Example of Nondiscriminating Package Usage
