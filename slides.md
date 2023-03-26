@@ -18,7 +18,9 @@ info: |
 
   Understanding how package managers work, how and when to use external packages, and how bundlers work to turn the hundreds or thousands of files in your project into a deployable bundle.
 
-  Slides available [here](https://code.ldrhub.com/brian/tooling-pkmgr-bundlers)
+  Slides available [here](https://d1nc2982yfv0k1.cloudfront.net/bdpennington/slides/tooling-pkmgr-bundlers/)
+
+  GitLab repo [here](https://git.streamon.fm/brian/tooling-pkmgr-bundlers)
 # persist drawings in exports and build
 drawings:
   persist: false
@@ -34,7 +36,7 @@ css: unocss
 
 Understanding how package managers work, how and when to use external packages, and how bundlers work to turn the hundreds or thousands of files in your project into a deployable bundle.
 
-Slides available [here](https://code.ldrhub.com/brian/tooling-pkmgr-bundlers)
+Slides available [here](https://d1nc2982yfv0k1.cloudfront.net/bdpennington/slides/tooling-pkmgr-bundlers/)
 
 <div class="abs-br m-6 flex gap-2">
   <a href="https://git.streamon.fm/brian/tooling-pkmgr-bundlers" target="_blank" alt="GitLab"
