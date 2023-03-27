@@ -170,6 +170,8 @@ Let's look at a few, again from the ui-kit.
   - 'prepare' is run after install
     - used for husky
   - 'prepublishOnly' Runs BEFORE the package is prepared and packed, ONLY on npm publish
+
+Talk about pre-commit hooks for linting/formatting to ensure code quality
  -->
 
 ---
