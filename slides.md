@@ -64,7 +64,7 @@ All about making development easier, faster, and more consistent.
 transition: fade-out
 ---
 
-# Package Mangers
+# Package Managers
 
 Package Managers are tools for automating the installation, upgrading, configuring, or removing of programs in a consistent manner.
 
