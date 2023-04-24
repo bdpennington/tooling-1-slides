@@ -18,9 +18,9 @@ info: |
 
   Understanding how package managers work, how and when to use external packages, and how bundlers work to turn the hundreds or thousands of files in your project into a deployable bundle.
 
-  Slides available [here](https://d1nc2982yfv0k1.cloudfront.net/bdpennington/slides/tooling-pkmgr-bundlers/)
+  Slides available [here](https://slides.brianpennington.dev/tooling-part-1)
 
-  GitLab repo [here](https://git.streamon.fm/brian/tooling-pkmgr-bundlers)
+  GitLab repo [here](https://github.com/bdpennington/tooling-1-slides)
 # persist drawings in exports and build
 drawings:
   persist: false
@@ -36,10 +36,10 @@ css: unocss
 
 Understanding how package managers work, how and when to use external packages, and how bundlers work to turn the hundreds or thousands of files in your project into a deployable bundle.
 
-Slides available [here](https://d1nc2982yfv0k1.cloudfront.net/bdpennington/slides/tooling-pkmgr-bundlers/)
+Slides available [here](https://slides.brianpennington.dev/tooling-part-1)
 
 <div class="abs-br m-6 flex gap-2">
-  <a href="https://git.streamon.fm/brian/tooling-pkmgr-bundlers" target="_blank" alt="GitLab"
+  <a href="https://github.com/bdpennington/tooling-1-slides" target="_blank" alt="GitHub"
     class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
     <logos-gitlab />
   </a>
@@ -111,23 +111,23 @@ Used to describe a package in a way that a package registry understands.
 
 The following several slides describe the basic anatomy of a package specification for the `npm` registry.
 
-Here's an example of the `package.json` from the `@futur/futuri-ui-kit` repo.
+Here's an example of the `package.json` from a hypothetical repo.
 
 ```json{all|2,4,10-15|3|5|6-9|all}
 {
-  "name": "@futuri/futuri-ui-kit",
-  "version": "0.15.8",
+  "name": "@bdp/ui-kit",
+  "version": "1.3.17",
   "description": "A custom ui-kit built with native Web Components",
   "main": "./dist/index.js",
   "private": true,
   "publishConfig": {
-    "registry": "https://npm-private.futurimedia.com/"
+    "registry": "https://npm-private.brianpennington.dev/"
   },
   "repository": {
     "type": "git",
-    "url": "git@code.ldrhub.com:frontend/futuri-ui-kit.git"
+    "url": "git@github.com/bdpennington/tooling-1-slides.git"
   },
-  "author": "Futuri",
+  "author": "Brian Pennington",
   "license": "SEE LICENSE IN Proprietary",
 }
 ```
@@ -167,7 +167,7 @@ Let's look at a few, again from the ui-kit.
 ```
 
 <!-- Lifecycle scripts
-  - 'prepare' is run after install
+  - 'prepare' is run after install, and as part of the ci command
     - used for husky
   - 'prepublishOnly' Runs BEFORE the package is prepared and packed, ONLY on npm publish
 
@@ -197,7 +197,7 @@ They are:
 
 # Dependencies Example
 
-Let's look at the dependencies for the `@futuri/futuri-ui-kit` package.
+Let's look at the dependencies for the ui-kit package.
 
 ```json{all|1-3|4-6|7-|all}
   "dependencies": {
@@ -325,7 +325,7 @@ instead of
 
 # Real Example of Completely Unnecessary Bloat
 
-In the Content Cloud frontend application, a developer installed the Bootstrap icon component library, which is a whopping 1.5MB of icons, just to use the icon component five times in the entire project.
+In one frontend application, a developer installed the Bootstrap icon component library, which is a whopping 1.5MB of icons, just to use the icon component five times in the entire project.
 
 Why is this a problem?
 
@@ -339,7 +339,7 @@ Why is this a problem?
 <!-- 
 1. That's a lot. Ideally, the **entire** bundle should less than 500KB. Just from the Bootstrap icon package, the bundle is already 3x larger than it should be. The icon package was also not tree-shakable, as it was a Vue plugin.
 
-2. Including the Material Icons font, the Font Awesome font, and the futuri-ui-kit icons (all of which are lazy-loaded and don't impact the initial bundle size).
+2. Including the Material Icons font, the Font Awesome font, and the ui-kit icons (all of which are lazy-loaded and don't impact the initial bundle size).
  -->
 
 ---
@@ -373,6 +373,10 @@ background: https://source.unsplash.com/X1exjxxBho4/1920x1080
 
 <img src="/assets/webpack-bundle.png" style="width: 100%; height: auto;">
 
+<!-- Talk about the main vendor bundle and how one might optimize
+  - moment locals
+  - moment timezones
+ -->
 ---
 
 # JavaScript Module Bundlers
@@ -723,5 +727,5 @@ background: https://source.unsplash.com/RCAhiGJsUUE/1920x1080
   }
 </style>
 
-- Slack: @bdpennington
-- Email: brian.pennington@futurimedia.com
+- Twitter: [@penningtonbd](https://twitter.com/penningtonbd)
+- GitHub: [https://github.com/bdpennington](https://github.com/bdpennington)
