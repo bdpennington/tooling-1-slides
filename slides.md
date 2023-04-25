@@ -18,7 +18,7 @@ info: |
 
   Understanding how package managers work, how and when to use external packages, and how bundlers work to turn the hundreds or thousands of files in your project into a deployable bundle.
 
-  Slides available [here](https://slides.brianpennington.dev/tooling-part-1)
+  Slides available [here](https://brianpennington.dev/presentations/tooling-pkmgr-bundlers/index.html)
 
   GitLab repo [here](https://github.com/bdpennington/tooling-1-slides)
 # persist drawings in exports and build
@@ -71,11 +71,11 @@ Package Managers are tools for automating the installation, upgrading, configuri
 Examples of package managers for specific languages are:
 
 | **Language** | **Package Manager** |
-| --- | --- |
-| JavaScript | npm, yarn, pnpm |
-| Python | pip, conda |
-| Rust | cargo |
-| PHP | composer |
+| ------------ | ------------------- |
+| JavaScript   | npm, yarn, pnpm     |
+| Python       | pip, conda          |
+| Rust         | cargo               |
+| PHP          | composer            |
 
 
 <!--
